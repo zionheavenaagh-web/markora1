@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Markora - Student Records</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <header>
+
+        <h1>Markora</h1>
+
+        <p>Student Academic Record Manager</p>
+
+    </header>
+
+    <nav>
+
+        <a href="#home">Home</a>
+
+        <a href="#student-form">Add Student</a>
+
+        <a href="#records">Student Records</a>
+
+    </nav>
+
+    <main id="home">
+
+        <section class="welcome">
+
+            <h2>Welcome to Markora!</h2>
+
+            <p>Manage student academic records easily.</p>
+
+        </section>
+
+        <section class="form-section" id="student-form">
+
+            <h2>Enter Student Details</h2>
+
+            <form id="studentForm">
+
+                <label for="studentName">Student Name</label>
+
+                <input type="text" id="studentName"
+
+                       placeholder="Enter student name" required>
+
+                <label for="rollNumber">Roll Number</label>
+
+                <input type="text" id="rollNumber"
+
+                       placeholder="Enter roll number" required>
+
+                <h3>Enter Five Subject Marks (Out of 100)</h3>
+
+                <label for="mark1">Subject 1</label>
+
+                <input type="number" id="mark1" min="0" max="100" required>
+
+                <label for="mark2">Subject 2</label>
+
+                <input type="number" id="mark2" min="0" max="100" required>
+
+                <label for="mark3">Subject 3</label>
+
+                <input type="number" id="mark3" min="0" max="100" required>
+
+                <label for="mark4">Subject 4</label>
+
+                <input type="number" id="mark4" min="0" max="100" required>
+
+                <label for="mark5">Subject 5</label>
+
+                <input type="number" id="mark5" min="0" max="100" required>
+
+                <button type="submit">Calculate & Add Student</button>
+
+                <button type="reset" class="reset-button">Clear Form</button>
+
+            </form>
+
+            <p id="message" role="status"></p>
+
+        </section>
+
+        <section class="records-section" id="records">
+
+            <h2>Student Records</h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Roll No.</th>
+
+                        <th>Name</th>
+
+                        <th>Total / 500</th>
+
+                        <th>Percentage</th>
+
+                        <th>Result</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="recordsBody">
+
+                    <tr>
+
+                        <td colspan="5">No student records yet.</td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
+    <footer>
+
+        <p>Markora | Student Academic Record Manager</p>
+
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
