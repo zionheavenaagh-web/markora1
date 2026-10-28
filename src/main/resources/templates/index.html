@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Markora - Student Records</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            margin: 0;
+            padding: 30px;
+            color: #1e293b;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        h1 {
+            color: #4338ca;
+            text-align: center;
+        }
+
+        .card {
+            background: white;
+            padding: 22px;
+            margin: 20px 0;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px #00000010;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+
+        input {
+            box-sizing: border-box;
+            width: 100%;
+            padding: 11px;
+            margin-top: 6px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+        }
+
+        button, .edit-link, .cancel-link {
+            display: inline-block;
+            background: #4338ca;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 10px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .delete-button {
+            background: #dc2626;
+        }
+
+        .cancel-link {
+            background: #64748b;
+        }
+
+        .message {
+            color: green;
+        }
+
+        .error {
+            color: red;
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #e2e8f0;
+            text-align: left;
+        }
+
+        th {
+            background: #e0e7ff;
+        }
+
+        .actions {
+            min-width: 130px;
+        }
+
+        .actions form {
+            display: inline;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 12px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+
+    <h1>Markora</h1>
+
+    <p style="text-align:center;">
+        Your Marks. Your Journey. One Place.
+    </p>
+
+    <!-- Add / Edit Student Form -->
+    <div class="card">
+
+        <h2 th:text="${student.id != null
+            ? 'Edit Student Record'
+            : 'Add Student Record'}">
+            Add Student Record
+        </h2>
+
+        <p class="message"
+           th:if="${message}"
+           th:text="${message}"></p>
+
+        <p class="error"
+           th:if="${error}"
+           th:text="${error}"></p>
+
+        <form th:action="${student.id != null
+                ? '/update' : '/save'}"
+              method="post"
+              th:object="${student}">
+
+            <input type="hidden"
+                   th:if="${student.id != null}"
+                   th:field="*{id}">
+
+            <div class="form-grid">
+
+                <label>Roll Number
+                    <input type="text"
+                           th:field="*{rollNumber}"
+                           required>
+                </label>
+
+                <label>Student Name
+                    <input type="text"
+                           th:field="*{name}"
+                           required>
+                </label>
+
+                <label>Tamil
+                    <input type="number"
+                           th:field="*{tamil}"
+                           min="0" max="100" required>
+                </label>
+
+                <label>English
+                    <input type="number"
+                           th:field="*{english}"
+                           min="0" max="100" required>
+                </label>
+
+                <label>Maths
+                    <input type="number"
+                           th:field="*{maths}"
+                           min="0" max="100" required>
+                </label>
+
+                <label>Science
+                    <input type="number"
+                           th:field="*{science}"
+                           min="0" max="100" required>
+                </label>
+
+                <label>Social
+                    <input type="number"
+                           th:field="*{social}"
+                           min="0" max="100" required>
+                </label>
+
+            </div>
+
+            <button type="submit"
+                    th:text="${student.id != null
+                        ? 'Update Student'
+                        : 'Save Student'}">
+                Save Student
+            </button>
+
+            <a th:if="${student.id != null}"
+               href="/"
+               class="cancel-link">
+                Cancel
+            </a>
+
+        </form>
+    </div>
+
+    <!-- Search Students -->
+    <div class="card">
+
+        <h2>Search Students</h2>
+
+        <form action="/search" method="get">
+
+            <input type="text"
+                   name="keyword"
+                   th:value="${keyword}"
+                   placeholder="Search by name or roll number">
+
+            <button type="submit">Search</button>
+
+            <a href="/">Show All</a>
+
+        </form>
+    </div>
+
+    <!-- Student Records -->
+    <!-- Student Records -->
+<div class="card">
+
+    <h2>Student Records</h2>
+
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Roll No.</th>
+                    <th>Name</th>
+                    <th>Total</th>
+                    <th>Percentage</th>
+                    <th>Result</th>
+                    <th>Grade</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr th:each="s : ${students}">
+                    <td th:text="${s.rollNumber}"></td>
+                    <td th:text="${s.name}"></td>
+                    <td th:text="${s.total}"></td>
+
+                    <td th:text="${#numbers.formatDecimal(
+                        s.percentage, 1, 2)} + '%'"></td>
+
+                    <td th:text="${s.passed ? 'PASS' : 'FAIL'}"></td>
+                    <td th:text="${s.grade}"></td>
+
+                    <td>
+                        <a th:href="@{/edit(id=${s.id})}"
+                           style="background:blue;color:white;
+                           padding:8px;text-decoration:none;
+                           border-radius:5px;">
+                            Edit
+                        </a>
+
+                        <form th:action="@{/delete}"
+                              method="post"
+                              style="display:inline;"
+                              onsubmit="return confirm(
+                              'Are you sure you want to delete?');">
+
+                            <input type="hidden"
+                                   name="id"
+                                   th:value="${s.id}">
+
+                            <button type="submit"
+                                    style="background:red;color:white;">
+                                Delete
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+
+                <tr th:if="${#lists.isEmpty(students)}">
+                    <td colspan="7">No student records found.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
