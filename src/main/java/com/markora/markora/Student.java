@@ -54,6 +54,10 @@ public class Student {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getRollNumber() {
         return rollNumber;
     }
@@ -120,14 +124,16 @@ public class Student {
 
     public boolean isPassed() {
         return tamil >= 35
-            && english >= 35
-            && maths >= 35
-            && science >= 35
-            && social >= 35;
+                && english >= 35
+                && maths >= 35
+                && science >= 35
+                && social >= 35;
     }
 
     public String getGrade() {
-        if (!isPassed()) return "F";
+        if (!isPassed()) {
+            return "F";
+        }
 
         double percentage = getPercentage();
 
@@ -140,4 +146,3 @@ public class Student {
         return "C";
     }
 }
-
