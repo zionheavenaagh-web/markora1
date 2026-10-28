@@ -1,0 +1,145 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f3f6fc;
+    color: #243047;
+}
+
+header {
+    background-color: #2347a5;
+    color: white;
+    text-align: center;
+    padding: 25px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 36px;
+}
+
+nav {
+    background-color: #172e70;
+    padding: 15px;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+}
+
+main {
+    width: 90%;
+    max-width: 1000px;
+    margin: 25px auto;
+}
+
+.welcome {
+    background-color: #dfe9ff;
+    padding: 25px;
+    text-align: center;
+    border-radius: 12px;
+    margin-bottom: 25px;
+}
+
+.form-section,
+.records-section {
+    background-color: white;
+    padding: 25px;
+    margin-bottom: 25px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px #00000010;
+}
+
+h2 {
+    color: #2347a5;
+}
+
+form label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+form input {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin-top: 7px;
+    border: 1px solid #cbd3e1;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+button {
+    background-color: #2347a5;
+    color: white;
+    border: none;
+    padding: 13px 18px;
+    margin-top: 20px;
+    margin-right: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #172e70;
+}
+
+.reset-button {
+    background-color: #64748b;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th, td {
+    padding: 12px;
+    border: 1px solid #dbe1ec;
+    text-align: center;
+}
+
+th {
+    background-color: #2347a5;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f3f6fc;
+}
+
+#message {
+    font-weight: bold;
+}
+
+footer {
+    background-color: #172e70;
+    color: white;
+    text-align: center;
+    padding: 15px;
+}
+
+@media (max-width: 600px) {
+    main {
+        width: 94%;
+    }
+
+    nav a {
+        display: inline-block;
+        margin: 8px;
+    }
+
+    .form-section,
+    .records-section {
+        padding: 15px;
+    }
+}
